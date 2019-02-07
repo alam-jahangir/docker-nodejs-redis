@@ -19,7 +19,7 @@ app.get('/:key', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    return res.send('Hello world');
+    return res.send('Redis & Node Js By Docker & Docker Compose');
 });
 
 const PORT = process.env.PORT || 3000;
