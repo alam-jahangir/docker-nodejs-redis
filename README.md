@@ -127,7 +127,7 @@
 
   ```js
   // For Testing Purpose
-router.get('/populate', function (req, res, next) {  
+  router.get('/populate', function (req, res, next) {  
   
   elastic.indexExists().then(function (exists) {  
     
@@ -175,10 +175,10 @@ router.get('/populate', function (req, res, next) {
 
   });
 
-});
+  });
 
-// Add Book to Index
-async function addBook(book) {
+  // Add Book to Index
+  async function addBook(book) {
     
     return await elasticClient.index({
         index: indexName,
@@ -190,24 +190,24 @@ async function addBook(book) {
         }
     });
 
-}
-exports.addBook = addBook;
+  }
+  exports.addBook = addBook;
 
-// Update a Book Information
-async function updateBook(book) {
+  // Update a Book Information
+  async function updateBook(book) {
 
-    return  await client.update({
-        index: indexName,
-        type: type,
-        id: book.id,
-        body: {
-            title: book.title,
-            content: book.content
-        }
-    });
+      return  await client.update({
+          index: indexName,
+          type: type,
+          id: book.id,
+          body: {
+              title: book.title,
+              content: book.content
+          }
+      });
 
-}
-exports.updateBook = updateBook;
+  }
+  exports.updateBook = updateBook;
   ```
 
 - Search Data From Books index of Elasticsearch. URL: http://localhost:3000/books/search/C  
