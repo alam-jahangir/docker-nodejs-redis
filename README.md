@@ -117,12 +117,13 @@
 
 
   ``` js
-// Import Elasticsearch Client
-app.use('/books', require('./routes/books'));
-var elastic = require('../elasticsearch');
+  // Import Elasticsearch Client
+  app.use('/books', require('./routes/books'));
+  var elastic = require('../elasticsearch');
   ```
 
-- Delete if Books Index Exist and Create Books index Newly and Populate Data. URL: http://localhost:3000/books/populate
+- Delete if Books Index Exist and Create Books index Newly and Populate Data. 
+- URL: http://localhost:3000/books/populate
 
   ```js
   // For Testing Purpose
