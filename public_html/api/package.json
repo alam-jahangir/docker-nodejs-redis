@@ -1,25 +1,27 @@
 {
-
   "name": "express-redis",
   "version": "1.0.0",
   "description": "Node Js with Redis using `docker-compose`",
   "scripts": {
     "start": "node server.js"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/jahangir033003/docker_nodejs_redis.git"
   },
-
-  "keywords": ["Node JS", "Express JS", "Docker", "Docker Compose", "Redis", "Elasticsearch"],
+  "keywords": [
+    "Node JS",
+    "Express JS",
+    "Docker",
+    "Docker Compose",
+    "Redis",
+    "Elasticsearch"
+  ],
   "author": "Md. Jahangir Alam <jahangir033003@gmail.com>",
   "license": "ISC",
-  
   "dependencies": {
     "express": "^4.16.4",
     "redis": "^2.8.0",
-    "elasticsearch": "15.4.1"
+    "elasticsearch": "^9.0.2"
   }
-
 }

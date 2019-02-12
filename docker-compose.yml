@@ -2,21 +2,53 @@ version: "3"
 services:
   redis:
     image: redis:alpine
-    container_name: cache
+    container_name: redis_cache
     ports:
       - 6379:6379
-
+  
   app:
+    container_name: nodejs_app
     build: ./
     volumes:
-      - ./:/var/www/app
+      - ./public_html/api:/var/www/html
     links:
       - redis
+      - elasticsearch
     ports:
       - 3000:3000
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - REDIS_URL=redis://cache
-    command:
-      sh -c 'node server.js'
+      - ES_HOST=elasticsearch
+    #  - ES_PORT=9201
+      - REDIS_URL=redis://redis_cache
+    #command:
+    #  sh -c 'node /var/www/html/server.js'
+
+  frontend: # Nginx Server For Frontend App
+    container_name: nginx
+    image: nginx:latest
+    volumes: # Serve local "public_html/web" dir
+      - ./public_html/web:/usr/share/nginx/html
+    ports:
+      - 8888:80 # Forward site to localhost:8888 
+
+  #Reference Link: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+  elasticsearch:
+    container_name: elasticsearch
+    #image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+    volumes:
+      - ./es_data:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    #  - cluster.name=docker-cluster
+    ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+    ports: 
+      - 9201:9200
+
