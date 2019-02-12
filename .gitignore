@@ -1,3 +1,4 @@
 node_modules/
 public_html/api/node_modules/
 package-lock.json
+es_data/
